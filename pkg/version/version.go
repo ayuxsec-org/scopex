@@ -8,9 +8,12 @@ func String() string {
 	if Version != "dev" {
 		return Version
 	}
-	info, ok := debug.ReadBuildInfo()
-	if ok && info.Main.Version != "(devel)" {
-		return Version
+
+	if info, ok := debug.ReadBuildInfo(); ok {
+		if info.Main.Version != "(devel)" {
+			return info.Main.Version
+		}
 	}
+
 	return Version
 }
