@@ -40,7 +40,7 @@ func (cmdi *Cmdi) validateH1() error {
 }
 
 func (cmdi *Cmdi) RunH1() error {
-	if !cmdi.Hackerone.ScrapeDomains || !cmdi.Hackerone.ScrapeWildCards || !cmdi.Hackerone.ScrapeSourceCode {
+	if !cmdi.Hackerone.ScrapeDomains && !cmdi.Hackerone.ScrapeWildCards && !cmdi.Hackerone.ScrapeSourceCode {
 		log.Error("no argument provided for hackerone scraper. Run -h or --help to get more info")
 		return nil
 	}
