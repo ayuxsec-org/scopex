@@ -26,7 +26,7 @@ func (cmdi *Cmdi) NewHackerOneCmd() *cobra.Command {
 	h1Cmd.Flags().BoolVarP(&cmdi.Hackerone.ScrapeDomains, "domains", "d", false, "Scrape all domains")
 	h1Cmd.Flags().BoolVarP(&cmdi.Hackerone.ScrapeWildCards, "wc", "w", false, "Scrape all wildcards")
 	h1Cmd.Flags().BoolVarP(&cmdi.Hackerone.ScrapeSourceCode, "source-code", "s", false, "find source codes")
-	h1Cmd.Flags().BoolVarP(&cmdi.Hackerone.VDPOnly, "vdp", "v", false, "List VDP programs only")
+	h1Cmd.Flags().BoolVar(&cmdi.Hackerone.VDPOnly, "vdp", false, "List VDP programs only")
 
 	return h1Cmd
 }
