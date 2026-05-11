@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/ayuxsec-org/log"
 	"github.com/ayuxsec-org/scopex/internal/scrapers/hackerone"
 	"github.com/spf13/cobra"
 )
@@ -39,6 +40,10 @@ func (cmdi *Cmdi) validateH1() error {
 }
 
 func (cmdi *Cmdi) RunH1() error {
+	if !cmdi.Hackerone.ScrapeDomains || !cmdi.Hackerone.ScrapeWildCards || !cmdi.Hackerone.ScrapeSourceCode {
+		log.Error("no argument provided for hackerone scraper. Run -h or --help to get more info")
+		return nil
+	}
 	scraper := hackerone.NewScraper(cmdi.Config.Hackerone, http.DefaultClient)
 	handles, err := scraper.GetAllHandles()
 	if err != nil {
@@ -53,7 +58,7 @@ func (cmdi *Cmdi) RunH1() error {
 			if cmdi.Hackerone.ScrapeWildCards {
 				if scope.EligibleForBounty && !cmdi.Hackerone.VDPOnly {
 					// todo: add hardcoded values to a constant
-					if scope.Type == "wildcard" {
+					if scope.Type == "WILDCARD" {
 						fmt.Println(scope.ID)
 					}
 				}
