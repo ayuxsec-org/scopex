@@ -1,0 +1,1 @@
+go install github.com/ayuxsec-org/scopex/cmd/scopex@latest
